@@ -31,7 +31,7 @@ c.execute("""CREATE TABLE items(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT,
     description TEXT,
-    prize REAL,
+    price REAL,
     image TEXT,
     category_id INTEGER,
     subcategory_id INTEGER,
@@ -72,7 +72,7 @@ items = [
     ("disco_music_1", "best disco song", 27.99, "", 3, 4)
 ]
 
-c.executemany("INSERT INTO items (title, description, prize, image, category_id, subcategory_id) VALUES (?, ?, ?, ?, ?, ?)", items)
+c.executemany("INSERT INTO items (title, description, price, image, category_id, subcategory_id) VALUES (?, ?, ?, ?, ?, ?)", items)
 
 
 comments = [

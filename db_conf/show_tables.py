@@ -9,6 +9,11 @@ path = os.path.join(base_dir, 'db', 'alegrosz.db')
 conn = sqlite3.connect(path)
 c = conn.cursor()
 
+def show_results(data):
+    if data == "items":
+        return show_items()
+
+
 def show_items():
     items = c.execute("""SELECT
         i.id, i.title, i.description, i.prize, i.image, c.name, c.id, s.name, s.id
@@ -30,5 +35,51 @@ def show_items():
         print(f"subcategory name: {row[7]} ({row[8]})")
         print(f"{'#' * 40}")
 
-# TODO write 3 functions (show_categories, show_subcategories, show_comments)
 # TODO jak odpale show_tables jako script w termnalu to ma mnie zapytać którą tabelę chce zobaczyć a następnie wyślwieltlić tylko ta jedną
+
+
+def show_categories():
+    categories = c.execute("""SELECT
+        c.name, c.id
+        FROM
+        categories AS c
+    """)
+
+    print("CATEGORY")
+    print(f"{'#' * 40}")
+    for row in categories:
+        print(f"category_name: {row[0]} ({row[1]})")
+        print(f"{'#' * 40}")
+
+
+def show_subcategories():
+    subcategories = c.execute("""SELECT
+        s.name, s.id, c.name, c.id
+        FROM
+        subcategories AS s
+        INNER JOIN categories AS c ON s.category_id = c.id
+    """)
+
+    print("SUBCATEGORY")
+    print(f"{'#' * 40}")
+    for row in subcategories:
+        print(f"subcategory name: {row[0]} ({row[1]})")
+        print(f"category name: {row[2]} ({row[3]})")
+
+
+def show_comments():
+    comments = c.execute("""SELECT
+        cm.id, cm.content, i.id, i.title
+        FROM
+        comments AS cm
+        INNER JOIN items AS i ON cm.item_id = i.id
+    """)
+
+    print("COMMENTS")
+    print(f"{'#' * 40}")
+    for row in comments:
+        print(f"comment_id: {row[0]}")
+        print(f"content: {row[1]}")
+        print(f"item_id: {row[2]}")
+        print(f"item_title: {row[3]}")
+        print(f"{'#' * 40}")
