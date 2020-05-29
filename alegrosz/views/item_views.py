@@ -69,7 +69,7 @@ def add_item():
     subcategories = c.fetchall()
     form.subcategory.choices = subcategories
 
-    if request.method == 'POST':
+    if form.validate_on_submit():
         filename = ""
         if form.image.data:
             filename = save_image_upload(form.image.data)
@@ -107,8 +107,6 @@ def edit_item(item_id):
         }
     except TypeError:
         item = {}
-
-
 
     if item:
         form = EditItemForm()
@@ -153,7 +151,6 @@ def delete_item(item_id):
     c = conn.cursor()
     item_from_db = c.execute("""SELECT * FROM items WHERE id = ?""", (item_id,))
     row =c.fetchone()
-
 
     try:
         item = {
