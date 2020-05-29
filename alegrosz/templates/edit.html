@@ -7,9 +7,9 @@
 {% block content %}
 <div class="row">
     <div class="col-lg-7 offset-lg-2 my-5">
-        <h1>Add new item</h1>
+        <h1>Edit item: <a href="{{ url_for("items.get_item", item_id=item.id) }}">{{ item.title }}</a></h1>
         <hr>
-        <form action="{{ url_for('items.add_item') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ url_for("items.edit_item", item_id=item.id) }}" method="POST" enctype="multipart/form-data">
             {{ form.hidden_tag() }}
                 <div class="form-group">
                     {{ form.title.label }}
@@ -27,14 +27,6 @@
                     {{ form.image.label }}
                     {{ form.image }}
                 </div>
-                <div class="form-group">
-                    {{ form.category.label }}
-                    {{ form.category(class="form-control") }}
-                </div>
-                <div class="form-group">
-                    {{ form.subcategory.label }}
-                    {{ form.subcategory(class="form-control") }}
-            </div>
             <hr>
             {{ form.submit(class="btn btn-primary form-control") }}
 

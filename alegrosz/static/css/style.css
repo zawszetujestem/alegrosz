@@ -5,3 +5,7 @@
 .card-img-top{
     object-fit: cover;
 }
+
+.delete-form{
+    display: inline;
+}
