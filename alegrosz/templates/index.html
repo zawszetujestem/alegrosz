@@ -15,6 +15,10 @@ Index
                     {{ form.title(class="form-control") }}
                 </div>
                 <div class="form-group">
+                    {{ form.adv_filter.label }}
+                    {{ form.adv_filter(class="form-check") }}
+                </div>
+                <div class="form-group">
                     {{ form.price.label }}
                     {{ form.price(class="form-control") }}
                 </div>
@@ -70,4 +74,9 @@ Index
     </div>
 </div>
 
+{% endblock %}
+
+{% block  scripts %}
+  {{ super() }}
+  <script src="{{ url_for('static', filename='js/categories.js') }}"></script>
 {% endblock %}

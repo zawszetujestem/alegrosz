@@ -12,6 +12,8 @@ def add_comment():
     c = conn.cursor()
     form = NewCommentForm()
 
+    is_ajax = True
+
     if form.validate_on_submit():
         c.execute("""INSERT INTO comments (content, item_id) VALUES (?, ?)""",
                   (
@@ -21,5 +23,6 @@ def add_comment():
                   )
         conn.commit()
 
-       # return render_template("/_comment.html", content=form.content.data)
+    if is_ajax:
+        return render_template("/_comment.html", content=form.content.data)
     return redirect(url_for("items.get_item", item_id=form.item_id.data))
