@@ -1,0 +1,11 @@
+.unexpected-margin{
+    margin-top: 150px;
+}
+
+.card-img-top{
+    object-fit: cover;
+}
+
+.delete-form{
+    display: inline;
+}
